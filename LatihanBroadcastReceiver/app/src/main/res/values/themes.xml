@@ -6,4 +6,23 @@
     </style>
 
     <style name="Theme.LatihanBroadcastReceiver" parent="Base.Theme.LatihanBroadcastReceiver" />
+
+    <style name="Theme.LatihanBroadcastReceiver.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.LatihanBroadcastReceiver.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.LatihanBroadcastReceiver.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.LatihanBroadcastReceiver.ToolbarFont" parent="ThemeOverlay.AppCompat">
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">?attr/colorSurfaceVariant</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">?attr/colorSurfaceVariant</item>
+        <!--        <item name="android:fontFamily">@font/montserrat_semibold</item>-->
+    </style>
+
+    <style name="Theme.LatihanBroadcastReceiver.Dialog" parent="Theme.Material3.DayNight.Dialog" />
 </resources>

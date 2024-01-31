@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sms_receiver"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:theme="@style/Theme.LatihanBroadcastReceiver.Dialog"
+    tools:context=".SmsReceiverActivity">
 
     <include
         android:id="@+id/app_bar"
@@ -20,16 +22,28 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/tv_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="@string/this_sms_receiver_app" />
+            android:text="@string/coming_from" />
 
-        <Button
-            android:id="@+id/btn_permission"
+        <TextView
+            android:id="@+id/tv_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/check_sms_permission" />
+            android:layout_marginBottom="16dp"
+            android:text="@string/this_play"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="end"
+            android:layout_marginBottom="24dp"
+            android:padding="8dp"
+            android:text="@string/close" />
 
     </LinearLayout>
 </LinearLayout>
