@@ -6,4 +6,21 @@
     </style>
 
     <style name="Theme.SimpleNotif" parent="Base.Theme.SimpleNotif" />
+
+    <style name="Theme.SimpleNotif.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.SimpleNotif.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SimpleNotif.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.SimpleNotif.ToolbarFont" parent="ThemeOverlay.AppCompat">
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">?attr/colorSurfaceVariant</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">?attr/colorSurfaceVariant</item>
+        <!--        <item name="android:fontFamily">@font/montserrat_semibold</item>-->
+    </style>
 </resources>
