@@ -1,7 +1,9 @@
 package com.idcamp.latihan.simplenotif
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
@@ -34,6 +36,16 @@ class MainActivity : AppCompatActivity() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setSubText(getString(R.string.notification_subtext))
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            builder.setChannelId(CHANNEL_ID)
+            notificationManager.createNotificationChannel(channel)
+        }
+
         val notification = builder.build()
         notificationManager.notify(NOTIFICATION_ID, notification)
     }
@@ -41,5 +53,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val NOTIFICATION_ID = 1
         private const val CHANNEL_ID = "channel_01"
+        private const val CHANNEL_NAME = "dicoding channel"
     }
 }
