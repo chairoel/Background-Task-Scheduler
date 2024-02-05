@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.appBar.toolbar)
+        title = getString(R.string.app_name)
+
         if (Build.VERSION.SDK_INT >= 33) {
             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
