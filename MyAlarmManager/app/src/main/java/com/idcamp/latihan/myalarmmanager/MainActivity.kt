@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
                 val onceTime = binding?.tvOnceTime?.text.toString()
                 val onceMessage = binding?.edtOnceMessage?.text.toString()
 
-                alarmReceiver.setOnetimeAlarm(
+                alarmReceiver.setOneTimeAlarm(
                     this, AlarmReceiver.TYPE_ONE_TIME,
                     onceDate, onceTime, onceMessage
                 )

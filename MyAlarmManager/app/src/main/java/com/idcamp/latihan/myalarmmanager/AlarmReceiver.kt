@@ -93,7 +93,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     // Metode ini digunakan untuk menjalankan alarm one time
-    fun setOnetimeAlarm(
+    fun setOneTimeAlarm(
         context: Context,
         type: String,
         date: String,
