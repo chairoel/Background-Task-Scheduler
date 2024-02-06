@@ -34,6 +34,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
+    // Gunakan metode ini untuk menampilkan notifikasi
     private fun showAlarmNotification(
         context: Context,
         title: String,
@@ -54,8 +55,14 @@ class AlarmReceiver : BroadcastReceiver() {
             .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
             .setSound(alarmSound)
 
+        /*
+       Untuk android Oreo ke atas perlu menambahkan notification channel
+       Materi ini akan dibahas lebih lanjut di modul extended
+        */
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
+            /* Create or update. */
             val channel = NotificationChannel(
                 channelId,
                 channelName,
@@ -75,6 +82,7 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationManagerCompat.notify(notifId, notification)
     }
 
+    // Metode ini digunakan untuk menjalankan alarm one time
     fun setOnetimeAlarm(
         context: Context,
         type: String,
@@ -82,6 +90,8 @@ class AlarmReceiver : BroadcastReceiver() {
         time: String,
         message: String
     ) {
+
+        // Validasi inputan date dan time terlebih dahulu
         if (isDateInvalid(date, DATE_FORMAT) || isDateInvalid(time, TIME_FORMAT)) return
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -109,6 +119,46 @@ class AlarmReceiver : BroadcastReceiver() {
 
     }
 
+    // Metode ini digunakan untuk menjalankan alarm repeating
+    fun setRepeatingAlarm(
+        context: Context,
+        type: String,
+        time: String,
+        message: String
+    ) {
+
+        // Validasi inputan waktu terlebih dahulu
+        if (isDateInvalid(time, TIME_FORMAT)) return
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        intent.putExtra(EXTRA_MESSAGE, message)
+        intent.putExtra(EXTRA_TYPE, type)
+
+        val timeArray = time.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]))
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
+        calendar.set(Calendar.SECOND, 0)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            ID_REPEATING,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+
+        Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show()
+    }
+
+    // Metode ini digunakan untuk validasi date dan time
     private fun isDateInvalid(date: String, format: String): Boolean {
         return try {
             val df = SimpleDateFormat(format, Locale.getDefault())
