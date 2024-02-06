@@ -21,7 +21,17 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-        TODO("AlarmReceiver.onReceive() is not implemented")
+        val type = intent.getStringExtra(EXTRA_TYPE)
+        val message = intent.getStringExtra(EXTRA_MESSAGE)
+
+        val title =
+            if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) TYPE_ONE_TIME else TYPE_REPEATING
+        val notifId =
+            if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) ID_ONETIME else ID_REPEATING
+
+        if (message != null) {
+            showAlarmNotification(context, title, message, notifId)
+        }
     }
 
     private fun showAlarmNotification(
