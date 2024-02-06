@@ -1,4 +1,4 @@
-package com.idcamp.latihan.myalarmmanager
+package com.idcamp.latihan.myalarmmanager.utils
 
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -26,14 +26,19 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val calendar = Calendar.getInstance()
+        // Tahun hari ini
         val year = calendar.get(Calendar.YEAR)
+
+        // Bulan hari ini
         val month = calendar.get(Calendar.MONTH)
+
+        // Tanggal hari ini
         val date = calendar.get(Calendar.DATE)
 
         return DatePickerDialog(activity as Context, this, year, month, date)
     }
 
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+    override fun onDateSet(view: DatePicker, year: Int, month: Int, dayOfMonth: Int) {
         mListener?.onDialogDateSet(tag, year, month, dayOfMonth)
     }
 

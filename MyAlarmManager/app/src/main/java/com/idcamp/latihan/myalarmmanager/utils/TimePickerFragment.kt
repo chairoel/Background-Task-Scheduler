@@ -1,4 +1,4 @@
-package com.idcamp.latihan.myalarmmanager
+package com.idcamp.latihan.myalarmmanager.utils
 
 import android.app.Dialog
 import android.app.TimePickerDialog
@@ -14,7 +14,7 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mListener = context as DialogTimeListener
+        mListener = context as DialogTimeListener?
     }
 
     override fun onDetach() {
@@ -26,14 +26,19 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val calendar = Calendar.getInstance()
+        // Jam hari ini
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        // Menit dari jam hari ini
         val minute = calendar.get(Calendar.MINUTE)
+
+        // True untuk format 24 jam, false untuk format 12 jam (am / pm)
         val formatHour24 = true
 
-        return TimePickerDialog(activity as Context, this, hour, minute, formatHour24)
+        return TimePickerDialog(activity, this, hour, minute, formatHour24)
     }
 
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+    override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
         mListener?.onDialogTimeSet(tag, hourOfDay, minute)
     }
 

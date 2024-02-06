@@ -89,14 +89,14 @@ class AlarmReceiver : BroadcastReceiver() {
         intent.putExtra(EXTRA_MESSAGE, message)
         intent.putExtra(EXTRA_TYPE, type)
 
-        Log.e(TAG, "setOnetimeAlarm: $date $time")
+        Log.e(TAG, "ONE TIME: $date $time $message")
         val dateArray = date.split("-").toTypedArray()
         val timeArray = time.split(":").toTypedArray()
 
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, Integer.parseInt(dateArray[0]))
         calendar.set(Calendar.MONTH, Integer.parseInt(dateArray[1]) - 1)
-        calendar.set(Calendar.DAY_OF_YEAR, Integer.parseInt(dateArray[2]))
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateArray[2]))
         calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]))
         calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]))
         calendar.set(Calendar.SECOND, 0)
