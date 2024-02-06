@@ -9,8 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.provider.Settings.System.DATE_FORMAT
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
@@ -32,7 +30,7 @@ class AlarmReceiver : BroadcastReceiver() {
             if (type.equals(TYPE_ONE_TIME, ignoreCase = true)) ID_ONETIME else ID_REPEATING
 
         //Jika Anda ingin menampilkan dengan toast anda bisa menghilangkan komentar pada baris dibawah ini.
-//        showToast(context, title, message)
+        showToast(context, title, message)
 
         if (message != null) {
             showAlarmNotification(context, title, message, notifId)
