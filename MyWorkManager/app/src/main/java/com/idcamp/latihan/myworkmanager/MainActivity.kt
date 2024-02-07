@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.work.Constraints
 import androidx.work.WorkManager
 import androidx.work.Data
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import com.idcamp.latihan.myworkmanager.databinding.ActivityMainBinding
 
@@ -54,8 +56,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .putString(MyWorker.EXTRA_CITY, binding.editCity.text.toString())
             .build()
 
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
         val oneTimeWorkRequest = OneTimeWorkRequest.Builder(MyWorker::class.java)
             .setInputData(data)
+            .setConstraints(constraints)
             .build()
 
         workManager.enqueue(oneTimeWorkRequest)
