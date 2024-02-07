@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresDeviceIdle(true)
             .build()
 
         periodicWorkRequest =
