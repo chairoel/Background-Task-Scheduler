@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        val periodicWorkRequest =
+        periodicWorkRequest =
             PeriodicWorkRequest.Builder(MyWorker::class.java, 15, TimeUnit.MINUTES)
                 .setInputData(data)
                 .setConstraints(constraints)
@@ -112,6 +112,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun cancelPeriodicTask() {
-        TODO("Not yet implemented")
+        workManager.cancelWorkById(periodicWorkRequest.id)
     }
 }
